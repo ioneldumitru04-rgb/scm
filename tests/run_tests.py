@@ -3,7 +3,7 @@ import argparse
 import pytest
 
 def api_security_tests():
-    pytest.main(["./API", "-v", "--cache-clear"])
+    pytest.main(["API", "-v", "--cache-clear"])
 
 def main():
     parser = argparse.ArgumentParser(description='Parser for verification tests runner')
