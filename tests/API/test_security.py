@@ -18,14 +18,13 @@ os.environ.setdefault('MYSQL_DATABASE', 'test')
 os.environ.setdefault('SECRET_KEY', 'test-secret')
 
 
-from app import app 
+with patch('mysql.connector.pooling.MySQLConnectionPool', return_value=MagicMock()):
+    import app as flask_app
 
 @pytest.fixture
 def client():
-    with patch('mysql.connector.pooling.MySQLConnectionPool', MagicMock()):
-        from app import app
 
-    with app.test_client() as client:
+    with flask_app.app.test_client() as client:
         yield client
 
 #login tests for each endpoint
