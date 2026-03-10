@@ -5,7 +5,8 @@ import pytest
 import flask_security
 from unittest.mock import MagicMock, patch
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../../', 'CRM-backend/app'))
+workspace = os.environ.get('WORKSPACE')
+backend_path = os.path.join(workspace, 'CRM-backend/app')
 
 from app import app 
 
