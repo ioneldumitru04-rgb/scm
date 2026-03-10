@@ -5,7 +5,7 @@ import os
 
 workspace = os.environ.get('WORKSPACE')
 def api_security_tests():
-    pytest.main(["{workspace}/scm/tests/API/", "-v", "--cache-clear"])
+    pytest.main([f"{workspace}/scm/tests/API/", "-v", "--cache-clear"])
 
 def main():
     parser = argparse.ArgumentParser(description='Parser for verification tests runner')
