@@ -10,15 +10,23 @@ backend_path = os.path.join(workspace, 'CRM-backend/app')
 sys.path.insert(0, backend_path)
 print(backend_path)
 
+# Setezi env variables fake INAINTE de import
+os.environ.setdefault('MYSQL_HOST', 'localhost')
+os.environ.setdefault('MYSQL_USER', 'test')
+os.environ.setdefault('MYSQL_PASSWORD', 'test')
+os.environ.setdefault('MYSQL_DATABASE', 'test')
+os.environ.setdefault('SECRET_KEY', 'test-secret')
+
+
 from app import app 
 
 @pytest.fixture
 def client():
-    with patch('app.db', MagicMock()):  # ignoram complet DB-ul
+    with patch('mysql.connector.pooling.MySQLConnectionPool', MagicMock()):
         from app import app
 
-        with app.test_client() as client:
-            yield client
+    with app.test_client() as client:
+        yield client
 
 #login tests for each endpoint
 def test_status_endpoint_security_check(client):
