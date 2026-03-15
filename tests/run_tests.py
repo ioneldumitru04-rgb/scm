@@ -10,12 +10,23 @@ def api_security_tests():
         ["pytest", f"{workspace}/scm/tests/API/", "-v", "--cache-clear", "--color=yes"],
         check=True
     )
+
+def automated_security_checks():
+    subprocess.run(
+        ["bandit", f"{workspace}/scm/tests/API/app.py", ""],
+        check=True
+    )
+
 def main():
     parser = argparse.ArgumentParser(description='Parser for verification tests runner')
     parser.add_argument("--security_tests", action='store_true', help="Run security tests for APIs verification")
     parser.add_argument("--functionality_tests", action='store_true', help="Run tests for APIs verification")
+    parser.add_argument("--automated_security_tests", action='store_true', help="Automated security checks")
+
     args = parser.parse_args()
 
+    if args.automated_security_tests:
+        automated_security_checks()
     if args.security_tests:
         api_security_tests()
 
