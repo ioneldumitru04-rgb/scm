@@ -13,7 +13,7 @@ def api_security_tests():
 
 def automated_security_checks():
     subprocess.run(
-        ["bandit", f"{workspace}/CRM-backend/app/app.py", ""],
+        ["bandit", f"{workspace}/CRM-backend/app/app.py", "--format", "text", "-ll", "--color"],
         check=True
     )
 
