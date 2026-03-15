@@ -2,11 +2,14 @@
 import argparse
 import pytest
 import os 
+import subprocess
 
 workspace = os.environ.get('WORKSPACE')
 def api_security_tests():
-    pytest.main([f"{workspace}/scm/tests/API/", "-v", "--cache-clear"])
-
+    subprocess.run(
+        ["pytest", f"{workspace}/scm/tests/API/", "-v", "--cache-clear", "--color=yes"],
+        check=True
+    )
 def main():
     parser = argparse.ArgumentParser(description='Parser for verification tests runner')
     parser.add_argument("--security_tests", action='store_true', help="Run security tests for APIs verification")
