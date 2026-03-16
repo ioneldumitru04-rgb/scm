@@ -7,7 +7,13 @@ import subprocess
 workspace = os.environ.get('WORKSPACE')
 def api_security_tests():
     subprocess.run(
-        ["pytest", f"{workspace}/scm/tests/API/", "-v", "--cache-clear", "--color=yes"],
+        ["pytest", f"{workspace}/scm/tests/API/test_security.py", "-v", "--cache-clear", "--color=yes"],
+        check=True
+    )
+
+def functionality_tests():
+    subprocess.run(
+        ["pytest", f"{workspace}/scm/tests/API/functionality_tests.py", "-v", "--cache-clear", "--color=yes"],
         check=True
     )
 
@@ -23,6 +29,8 @@ def main():
 
     args = parser.parse_args()
 
+    if args.functionality_tests:
+        functionality_tests()
     if args.automated_security_tests:
         automated_security_checks()
     if args.security_tests:
