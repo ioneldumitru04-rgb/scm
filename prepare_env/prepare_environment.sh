@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
-
-function python_environment() {
-
+function correct_ssh_key() {
+    ssh-add ~/.ssh/id_rsa_univ    
 }
 
-
-
-
-export -f python_environment
+export -f correct_ssh_key
