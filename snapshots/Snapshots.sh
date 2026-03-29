@@ -15,7 +15,7 @@ function clone_repo() {
     base_repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f4)
     repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
     full_repo="ssh://git@github.com/${base_repo}/${repo}"
-    git clone ${full_repo} -b ${BRANCH}
+    git clone ${REPO_SNAPSHOT} -b ${BRANCH}
 }
 
 function update_snapshots() {
