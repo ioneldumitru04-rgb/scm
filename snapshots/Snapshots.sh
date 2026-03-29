@@ -30,7 +30,7 @@ function update_snapshots() {
 
 
 function main() {
-    # clone_repo
+    clone_repo
     update_snapshots
 }
 
