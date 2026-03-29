@@ -12,13 +12,26 @@ fi
 snapshot_json_file="${WORKSPACE}/Snapshots/Snapshots.json"
 
 function clone_repo() {
-    for repo in $(jq -r '.[].repo' "${snapshot_json_file}"); do
-        git clone "${repo}"
-    done
+    base_repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f4)
+    repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
+    full_repo="ssh://git@github.com/${base_repo}/${repo}"
+    git clone ${full_repo} -b ${BRANCH}
 }
 
+function update_snapshots() {
+    repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
+    pushd "${WORKSPACE}/${repo}"
+    echo $repo
+    echo $REVISION
+    content=$(jq --arg COMPONENT "$repo" --arg REVISION "$REVISION" '.[$COMPONENT].revision = $REVISION' ${WORKSPACE}/Snapshots/Snapshots.json)
+    echo -E "${content}" > "${WORKSPACE}/Snapshots/Snapshots.json"
+    popd
+}
+
+
 function main() {
-    clone_repo
+    # clone_repo
+    update_snapshots
 }
 
 main
