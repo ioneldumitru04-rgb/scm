@@ -28,6 +28,7 @@ function update_snapshots() {
     content=$(jq --arg COMPONENT "$repo" --arg REVISION "$REVISION" '.[$COMPONENT].revision = $REVISION' ${WORKSPACE}/Snapshots.json)
     echo -E "${content}" > "${WORKSPACE}/Snapshots.json"
     cat "${WORKSPACE}/Snapshots.json"
+    git_push ${BRANCH}
     popd
 }
 

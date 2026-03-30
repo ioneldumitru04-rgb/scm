@@ -25,3 +25,10 @@ function warn() {
 function success() {
     echo -e "${Green}[SUCCESS] $1${Color_Off}"
 }
+
+function git_push_snapshot() {
+    local branch="$1"
+    git add .
+    git commit -m "SS: Added new snapshot"
+    git push origin ${branch}
+}
