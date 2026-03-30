@@ -21,8 +21,10 @@ function clone_repo() {
 function update_snapshots() {
     repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
     pushd "${WORKSPACE}/${repo}"
-    echo $repo
-    echo $REVISION
+    if [[ "${REVISION}" =~ ^[a-z0-9]{40}$ ]]; then 
+        error "Issue with revision. Please check."
+        exit 1
+    fi
     content=$(jq --arg COMPONENT "$repo" --arg REVISION "$REVISION" '.[$COMPONENT].revision = $REVISION' ${WORKSPACE}/Snapshots.json)
     echo -E "${content}" > "${WORKSPACE}/Snapshots.json"
     cat "${WORKSPACE}/Snapshots.json"
