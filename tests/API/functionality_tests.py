@@ -8,8 +8,6 @@ from unittest.mock import MagicMock, patch
 
 workspace = os.environ.get('WORKSPACE')
 
-workspace = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-
 backend_path = os.path.join(workspace, '/app')
 sys.path.insert(0, backend_path)
 
