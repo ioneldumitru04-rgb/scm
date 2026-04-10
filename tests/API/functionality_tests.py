@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+www#!/usr/bin/env python3
 import sys
 import os
 import pytest
@@ -10,7 +10,7 @@ workspace = os.environ.get('WORKSPACE')
 
 workspace = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
-backend_path = os.path.join(workspace, 'CRM-backend/app')
+backend_path = os.path.join(workspace, '/app')
 sys.path.insert(0, backend_path)
 
 # Setezi env variables fake INAINTE de import
