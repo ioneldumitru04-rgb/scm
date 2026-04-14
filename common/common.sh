@@ -30,7 +30,7 @@ function git_push_snapshot() {
     local branch="$1"
     git config --global user.email "ionel.dumitru04@e-uvt.ro"
     git config --global user.name "ionelDumitru"
-    git add .
+    git add Snapshots.json
     git commit -m "SS: Added new snapshot"
     git push origin ${branch}
 }
