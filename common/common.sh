@@ -25,7 +25,11 @@ function warn() {
 function success() {
     echo -e "${Green}[SUCCESS] $1${Color_Off}"
 }
-
+function checkout_at_specific_branch() {
+    local branch="$1"
+    git checkout ${branch}
+    success "Checked out to branch ${branch}"
+}
 function git_push_snapshot() {
     local branch="$1"
     git config --global user.email "ionel.dumitru04@e-uvt.ro"

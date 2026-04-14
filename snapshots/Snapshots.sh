@@ -23,6 +23,7 @@ function update_snapshots() {
         error "Issue with revision. Please check."
         exit 1
     fi
+    checkout_at_specific_branch ${BRANCH}
     content=$(jq --arg COMPONENT "$repo" --arg REVISION "$REVISION" '.[$COMPONENT].revision = $REVISION' ${WORKSPACE}/Snapshots.json)
     echo -E "${content}" > "${WORKSPACE}/Snapshots.json"
     cat "${WORKSPACE}/Snapshots.json"
