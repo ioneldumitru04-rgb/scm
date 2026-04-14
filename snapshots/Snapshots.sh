@@ -19,6 +19,7 @@ snapshot_json_file="${WORKSPACE}/Snapshots.json"
 # }
 
 function update_snapshots() {
+    repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
     if [[ ! "${REVISION}" =~ ^[a-z0-9]{40}$ ]]; then 
         error "Issue with revision. Please check."
         exit 1
