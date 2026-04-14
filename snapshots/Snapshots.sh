@@ -9,18 +9,16 @@ if ! source "${WORKSPACE}/scm/prepare_env/prepare_environment.sh"; then
     echo "[ERROR] Error to source common script."
 fi
 
-snapshot_json_file="${WORKSPACE}/Snapshots/Snapshots.json"
+snapshot_json_file="${WORKSPACE}/Snapshots.json"
 
-function clone_repo() {
-    base_repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f4)
-    repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
-    full_repo="ssh://git@github.com/${base_repo}/${repo}"
-    git clone ${REPO_SNAPSHOT} -b ${BRANCH}
-}
+# function clone_repo() {
+#     base_repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f4)
+#     repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
+#     full_repo="ssh://git@github.com/${base_repo}/${repo}"
+#     git clone ${REPO_SNAPSHOT} -b ${BRANCH}
+# }
 
 function update_snapshots() {
-    repo=$(echo $REPO_SNAPSHOT | cut -d'/' -f5)
-    pushd "${WORKSPACE}/${repo}"
     if [[ "${REVISION}" =~ ^[a-z0-9]{40}$ ]]; then 
         error "Issue with revision. Please check."
         exit 1
