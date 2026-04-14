@@ -19,7 +19,7 @@ snapshot_json_file="${WORKSPACE}/Snapshots.json"
 # }
 
 function update_snapshots() {
-    if [[ "${REVISION}" =~ ^[a-z0-9]{40}$ ]]; then 
+    if [[ ! "${REVISION}" =~ ^[a-z0-9]{40}$ ]]; then 
         error "Issue with revision. Please check."
         exit 1
     fi
@@ -32,7 +32,7 @@ function update_snapshots() {
 
 
 function main() {
-    clone_repo
+    #clone_repo
     update_snapshots
 }
 
